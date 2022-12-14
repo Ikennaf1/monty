@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define ARGMAX 2
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -31,5 +34,8 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+void readfile(char *file);
+char **parseline(char *line);
 
 #endif /* _MONTY_H */
