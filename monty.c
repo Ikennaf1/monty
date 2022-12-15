@@ -3,42 +3,50 @@
 stack_t *head = NULL;
 
 /**
- * main - Main entry point
- * @argc: Arg count
- * @argv: Arguments
- * Return: 1 or 0
- */
-int main(__attribute__((unused))int argc, char *argv[])
+  * main - The Monty Interpreter entry point
+  * @argn: The args number
+  * @args: The args passed to the interpreter
+  *
+  * Return: Always zero
+  */
+int main(int argn, char *args[])
 {
-	FILE *fp;
-	ssize_t read;
-	size_t len = 0;
-	char *line = NULL, **args;
-	unsigned int line_number = 1, status = 0;
+	FILE *fd = NULL;
+	size_t line_len = 0;
+	unsigned int line_num = 1;
+	int readed = 0, op_status = 0;
+	char *filename = NULL, *op_code = NULL, *op_param = NULL, *buff = NULL;
 
-	fp = file_open(argv[1]);
-	/*if (head == NULL)
-		create_stack();*/
+	filename = args[1];
+	check_args_num(argn);
+	fd = open_file(filename);
 
-	while ((read = getline(&line, &len, fp)) != -1)
+	while ((readed = getline(&buff, &line_len, fd)) != -1)
 	{
-		args = parseline(line);
-		if (args && args[0])
+		op_code = strtok(buff, "\t\n ");
+		if (op_code)
 		{
-			if (args[0][0] == '#')
+			if (op_code[0] == '#')
 			{
-				line_number++;
+				++line_num;
 				continue;
 			}
-			status = exec_opcode(args[0], args[1] ? args[1] : NULL);
-			if (status >= 300)
+
+			op_param = strtok(NULL, "\t\n ");
+			op_status = handle_execution(op_code, op_param, line_num, op_status);
+
+			if (op_status >= 100 && op_status < 300)
 			{
-				fclose(fp);
-				/*handle_error*/
+				fclose(fd);
+				handle_error(op_status, op_code, line_num, buff);
 			}
 		}
-		line_number++;
+
+		++line_num;
 	}
-	free(args);
+
+	frees_stack();
+	free(buff);
+	fclose(fd);
 	return (0);
 }
