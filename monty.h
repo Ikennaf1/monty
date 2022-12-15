@@ -58,5 +58,9 @@ stack_t **create_stack(void);
 void handle_error(unsigned int error);
 void pall();
 void pint();
+void pop();
+void swap();
+void add();
+void nop();
 
 #endif /* _MONTY_H */

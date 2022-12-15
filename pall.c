@@ -2,7 +2,7 @@
 
 /**
  * pall - Prints all values on the stack
- * Return: Void
+ * Return: result
  */
 void pall()
 {
