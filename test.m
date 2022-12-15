@@ -1,15 +1,15 @@
-push 0 Push 0 onto the stack
-push 1 Push 1 onto the stack
+push 10 Push 0 onto the stack
+push 11 Push 1 onto the stack
 
-push 2
-  push 3
+push 12
+  push 13
                    pall    
 
 
 		           
-push 4
+push 24
 
-    push 5    
-      push     6           
+    push 25    
+      push     26           
 
 pall This is the end of our programn. Monty is awesome!

@@ -7,7 +7,7 @@
  */
 char **parseline(char *line)
 {
-	char *delim = " \t\n";
+	char *delim = "\t\n ";
 	char *tok;
 	char **token;
 	unsigned int i;
@@ -15,9 +15,11 @@ char **parseline(char *line)
 	if (line == NULL)
 		exit(EXIT_FAILURE);
 
-	token = (char **) malloc(sizeof(char **) * ARGMAX);
+	token = (char **) malloc(sizeof(char *) * ARGMAX);
+	if (token == NULL)
+		exit(EXIT_FAILURE);
 	tok = strtok(line, delim);
-	for (i = 0; tok != NULL && i < ARGMAX; i++)
+	for (i = 0; (tok != NULL) && (i < ARGMAX); i++)
 	{
 		token[i] = tok;
 		tok = strtok(NULL, delim);
