@@ -1,0 +1,38 @@
+#include "monty.h"
+
+/**
+ * readfile - Reads the input file
+ * @file: The given file name
+ * Return: Void
+ */
+void readfile(char *file)
+{
+	unsigned int l_num = 1;
+	int check;
+	stack_t **stack = malloc(sizeof(stack_t **));
+
+	fp = fopen(file, "r");
+	if (fp == NULL)
+	{
+		printf("Error: Can't open file %s\n", file);
+		exit(EXIT_FAILURE);
+	}
+
+	while (1)
+	{
+		check = run_opcode(stack, l_num);
+		if (check == -1)
+		{
+			/*end of file*/
+			break;
+		}
+		if (check == 0)
+		{
+			/*opcode doesnt exist*/
+			break;
+		}
+		l_num++;
+	}
+
+	fclose(fp);
+}

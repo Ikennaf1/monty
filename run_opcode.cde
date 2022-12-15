@@ -1,0 +1,38 @@
+#include "monty.h"
+
+/**
+ * run_opcode - Selects from an array of opcodes to run
+ * @stack: The given stack
+ * @line_number: The line number
+ * Return: 1 or 0
+ */
+/*int run_opcode(stack_t **stack, unsigned int line_number)
+{
+	instruction_t opcodes[] = {
+		{"push", push},
+		{"pop", push},
+		{NULL, NULL}
+	};
+	unsigned int i, l_num = 1;
+	ssize_t read;
+	size_t len = 0;
+	char **args, *line = NULL;
+
+	for (i = 0; i < line_number; i++)
+	{
+		read = getline(&line, &len, fp);
+		if (read == -1)
+			return (-1);
+	}
+
+	args = parseline(line);
+
+	for (i = 0; opcodes[i].opcode != args[0]; i++)
+	{
+		if (opcodes[i].opcode == args[0])
+			opcodes[i].f(stack, l_num);
+	}
+	return (0);
+}*/
+void (*select_opcode(char *s))(stack_t **, unsigned int)
+{}
