@@ -7,6 +7,17 @@
 
 #define ARGMAX 2
 
+/* OK, good status */
+#define STATUS_OK 200
+#define OPCODE_FOUND 201
+
+/* Not found */
+#define OPCODE_NOT_FOUND 404
+
+/* Errors */
+#define NON_INT_ARGUMENT 500
+#define MALLOC_FAILED 501
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,7 +46,17 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void readfile(char *file);
+extern stack_t *head;
+
+void (*run_opcode(char *s))(stack_t **, unsigned int);
+FILE *file_open(char *s);
 char **parseline(char *line);
+unsigned int exec_opcode(char *opcode, char *param);
+unsigned int validate_opcode(char *opcode);
+void push(stack_t **, unsigned int);
+stack_t **create_stack(void);
+void handle_error(unsigned int error);
+void pall();
+void pint();
 
 #endif /* _MONTY_H */

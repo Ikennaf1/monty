@@ -1,3 +1,5 @@
+*.cde
+*.m
 *.exe
 *.exe.*
 *.stackdump
